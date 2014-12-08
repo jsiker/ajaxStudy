@@ -1,1 +1,1 @@
-##Practice with Ajax using Wikipedia and the NYT
+##Practice with Ajax using Wikipedia, Google Street View and the NYT
