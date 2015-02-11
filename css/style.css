@@ -14,6 +14,13 @@ body {background-color: #CCC;}
     color: black;
 }
 
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+
 .greeting, label {
     color:orangered;
     text-shadow: 1px 1px 3px rgba(255,255,255, .5);

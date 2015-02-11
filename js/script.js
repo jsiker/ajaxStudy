@@ -6,7 +6,6 @@ function loadData() {
     var $nytHeaderElem = $('#nytimes-header');
     var $nytElem = $('#nytimes-articles');
     var $greeting = $('#greeting');
-    var $flag = $('#flag');
 
     // clear out old data before new request
     $wikiElem.text("");
@@ -127,11 +126,24 @@ function loadData() {
             clearTimeout(wikiRequestTimeout); //stops timeout in error method so it doesn't run when request is successful
         }
     });
-    var flag = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + cityInput;
+
+        $.ajax({
+            url: 'http://en.wikipedia.org//w/api.php?action=parse&format=json&page='+city+'&prop=images|text',
+            dataType: 'jsonp',
+            success: function (response) {
+                var readData = $('<div>' + response.parse.text["*"] + '</div>');
+                var box = readData.find('.infobox');
+                var flagURL = box.find("img[src*='Flag']").attr('src');
+                var noFlag = box.find('img').first().attr('src');
+                if (typeof(flagURL) != 'undefined' ) {
+                    $('#flag').html('<div><img src="' + flagURL + '"/></div>')
+                } else {
+                    $('#flag').html('<div><img src="' + noFlag + '"/></div>')
+                }
+            }
+        });
 
     return false;
 }
 
 $('#form-container').submit(loadData);
-
-// loadData();
